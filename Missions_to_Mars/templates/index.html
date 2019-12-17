@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>Mars Current Information</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Latest Mars News:</h4>
+                <h6> <strong>{{ Mars_scraped.recent_news_title }}</strong></h6>
+                <p>{{ Mars_scraped.recent_news_p }}</p>
+                <hr class="mt-2">
+            </div>
+            <div class="col-lg-8">
+                <h4>Featured Image:</h4>
+                <img src=" {{ Mars_scraped.featured_image_url }}" alt="Featured Mars Image" width="650" height="450">
+            </div>
+            <div class="col-lg-4">
+                <h4>Current Weather on Mars</h4>
+                <hr class="my-2">
+                <p> {{ Mars_scraped.mars_weather }} </p>
+                <h4>Mars Facts</h4>
+                <hr class="mt-2">
+                <iframe src="/Mars_Stats_table.html"></iframe>
+            </div>
+
+        </div>
+        <div class="container">
+            <h4 class="display-5 text-center my-4">Mars Hemispheres</h4>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <img class="card-img-top" src=" {{ Mars_scraped.Mars_hemi_data_list[0].img_url }}"
+                            alt="Hemisphere image 1">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ Mars_scraped.Mars_hemi_data_list[0].title }}</h4>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src=" {{ Mars_scraped.Mars_hemi_data_list[1].img_url }}"
+                            alt="Hemisphere image 2">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ Mars_scraped.Mars_hemi_data_list[1].title }}</h4>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <img class="card-img-top" src=" {{ Mars_scraped.Mars_hemi_data_list[2].img_url }}"
+                            alt="Hemisphere image 3">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ Mars_scraped.Mars_hemi_data_list[2].title }}</h4>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src=" {{ Mars_scraped.Mars_hemi_data_list[3].img_url }}"
+                            alt="Hemisphere image 4">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ Mars_scraped.Mars_hemi_data_list[3].title }}</h4>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // Get the current year for the copyright
+        $('#year').text(new Date().getFullYear());
+
+        // Init Scrollspy
+        $('body').scrollspy({ target: '#main-nav' });
+
+        // Smooth Scrolling
+        $("#main-nav a").on('click', function (event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+
+                const hash = this.hash;
+
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function () {
+
+                    window.location.hash = hash;
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
