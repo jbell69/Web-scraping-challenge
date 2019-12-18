@@ -18,6 +18,7 @@ def index():
     return render_template("index.html", Mars_scraped=Mars_to_page)
 
 
+
 @app.route("/scrape")
 def scraper():
     # Run the scrape function

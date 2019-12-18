@@ -175,22 +175,33 @@ browser.visit(url5)
 html = browser.html
 soup = BeautifulSoup(html, 'html.parser')
 
-results = soup.find_all('div', class_='description')
-
 Mars_hemi_data_list = []
-Mars_hemi_data = {}
 
-for result in results:
+for i in range(4):
+
+    Mars_hemi_data = {}
+
+    browser.find_by_css('img[class=thumb]')[i].click()
+
+    html = browser.html
+    soup = BeautifulSoup(html, 'html.parser')
+
+    time.sleep(1)
     
-    Mars_hemi_data['title'] = result.h3.text
+    hemi_page = soup.find('div', class_='content')
+    hemi_link_list = hemi_page.find('section', class_='block metadata')
+    
+    Mars_hemi_data['title'] = hemi_link_list.h2.text
+    
+    hemi_img_page = soup.find('div', class_='downloads')
 
-    link = result.a['href']
-    Mars_hemi_data['img_url'] = ('https://astrogeology.usgs.gov/' + link)
+    Mars_hemi_data['img_url'] = hemi_img_page.li.a['href']
     
     Mars_hemi_data_list.append(Mars_hemi_data)
     print(Mars_hemi_data)
-# print(Mars_hemi_data_list)
-
+    
+    browser.back()
+print(Mars_hemi_data_list)
 
 # In[ ]:
 
